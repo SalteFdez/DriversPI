@@ -1,17 +1,15 @@
-const { Driver } = require('../db');
 const axios = require("axios");
 
 const getDriverById = async (req, res) => {
     try {
-        const id = 30/*req.params.idDriver*/; // cambiar
+        const id = req.params.idDriver; // cambiar
         const drivers = [];
-        const driver = await Driver.findByPk(id);
         const APIDriverResponse = await axios.get(`http://localhost:5000/drivers/${id}`);
         const APIDriver = APIDriverResponse.data;
-        if (driver) {
-            drivers.push(driver);
+        console.log(APIDriver)
+        if (APIDriver) {
+            drivers.push(APIDriver);
         };
-        drivers.push(APIDriver);
         if (drivers.length > 0) {
             return res.status(200).json(drivers);
         }
