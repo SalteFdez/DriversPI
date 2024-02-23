@@ -18,10 +18,6 @@ module.exports = (sequelize) => {
          type: DataTypes.STRING,
          allowNull: false
       },
-      description: {
-         type: DataTypes.TEXT,
-         allowNull: true
-      },
       image: {
          type: DataTypes.TEXT,
          allowNull: false,
@@ -33,6 +29,10 @@ module.exports = (sequelize) => {
       bornDate: {
          type: DataTypes.STRING,
          allowNull: false
+      },
+      description: {
+         type: DataTypes.TEXT,
+         allowNull: true
       },
       createdInDb: {
          type: DataTypes.BOOLEAN,

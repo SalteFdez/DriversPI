@@ -10,8 +10,17 @@ const getDriverById = async (req, res) => {
         if (APIDriver) {
             drivers.push(APIDriver);
         };
-        if (drivers.length > 0) {
-            return res.status(200).json(drivers);
+        const result = drivers.map(driver => ({
+            id: driver.id,
+            name: driver.name.forename,
+            lastName: driver.name.surname,
+            image: driver.image.url,
+            nationality: driver.nationality,
+            bornDate: driver.dob,
+            description: driver.description,
+        }));
+        if (result.length > 0) {
+            return res.status(200).json(result);
         }
         return res.status(401).send("No existe un driver con ese id.");
     } catch (error) {

@@ -10,10 +10,10 @@ const allDrivers = async (req, res) => {
         const transformedData = driversData.map(driver => ({
             name: driver.name.forename,
             lastName: driver.name.surname,
-            description: driver.description,
             image: driver.image.url,
             nationality: driver.nationality,
             bornDate: driver.dob,
+            description: driver.description,
           }));
         // Guardar o actualizar los datos en la base de datos
         await Driver.bulkCreate(transformedData, { updateOnDuplicate: ['name', 'lastName'] })
