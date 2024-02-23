@@ -7,6 +7,8 @@ const postDriver = async (req, res) => {
         if (!name || !lastName || !description || !image || !nationality || !bornDate) {
             return res.status(401).send("Faltan datos");
         }
+        
+        
 
         const teamsArray = teams.split(',').map(team => team.trim());
 

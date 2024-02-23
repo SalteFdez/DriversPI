@@ -8,7 +8,7 @@ const getDriverByName = async (req, res) => {
         
         const response = await axios.get(`http://localhost:5000/drivers?name.forename=${name}`);
         const apiDrivers = response.data;
-
+        console.log(apiDrivers)
         const dbDrivers = await Driver.findAll({
             where: {
                 name: {
@@ -23,12 +23,12 @@ const getDriverByName = async (req, res) => {
         if (first15DriversByName.length > 0) {
             // Mapear los resultados para estructurar la respuesta
             const result = first15DriversByName.map(driver => ({
-                name: driver.name.forename,
-                lastName: driver.name.surname,
+                name: driver.name.forename || driver.name,
+                lastName: driver.name.surname || driver.lastName,
                 description: driver.description,
-                image: driver.image.url,
+                image: driver.image.url || driver.image,
                 nationality: driver.nationality,
-                bornDate: driver.dob,
+                bornDate: driver.dob || driver.bornDate,
             }));
             return res.status(200).json(result);
         }else return res.status(401).send('No existen pilotos con ese nombre.')

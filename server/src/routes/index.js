@@ -8,9 +8,9 @@ const getTeams = require("../controllers/getTeams");
 const router = Router();
 
 router.get("/drivers", allDrivers);
-router.get("/drivers/name", getDriverByName);
-router.get("/drivers/:idDriver", getDriverById);
 router.post("/drivers", postDriver);
 router.get("/teams", getTeams);
+router.get("/drivers/name", getDriverByName);
+router.get("/drivers/:idDriver", getDriverById);
 
 module.exports = router;
