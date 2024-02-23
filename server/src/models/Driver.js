@@ -4,9 +4,35 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Driver', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  });
+      id: {
+        type: DataTypes.INTEGER,
+         allowNull: false,
+         primaryKey: true,
+         autoIncrement: true
+      },
+      name: {
+         type: DataTypes.STRING,
+         allowNull: false
+      },
+      lastName: {
+         type: DataTypes.STRING,
+         allowNull: false
+      },
+      description: {
+         type: DataTypes.TEXT,
+         allowNull: true
+      },
+      image: {
+         type: DataTypes.TEXT,
+         allowNull: false
+      },
+      nacionality: {
+         type: DataTypes.STRING,
+         allowNull: false
+      },
+      bornDate: {
+         type: DataTypes.STRING,
+         allowNull: false
+      }
+   }, { timestamps: false });
 };
