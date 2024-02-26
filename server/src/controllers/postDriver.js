@@ -7,8 +7,6 @@ const postDriver = async (req, res) => {
         if (!name || !lastName || !description || !image || !nationality || !bornDate) {
             return res.status(401).send("Faltan datos");
         }
-        
-        
 
         const teamsArray = teams.split(',').map(team => team.trim());
 
@@ -27,10 +25,10 @@ const postDriver = async (req, res) => {
 
         const teamIds = teamInstances.map((team) => team[0].id);
 
+
         await newDriver.addTeams(teamIds, { through: driverTeams });
 
-        const allDrivers = await Driver.findAll();
-        return res.status(200).json(allDrivers);
+        return res.status(200).json(newDriver);
     } catch (error) {
         return res.status(500).send(error.message);
     }

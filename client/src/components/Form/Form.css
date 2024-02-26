@@ -1,0 +1,26 @@
+.userForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.userForm input {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    text-decoration: underline;
+}
+
+.userForm button {
+    margin-top: 10px;
+}

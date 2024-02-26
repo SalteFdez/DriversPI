@@ -1,0 +1,13 @@
+.nav {
+    background-color: purple;
+    display: flex;
+    padding: 2px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.nav button {
+    margin-right: 50px;
+    background-color: red;
+}
