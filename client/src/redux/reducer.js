@@ -89,6 +89,17 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 drivers: orderCopy
             };
+        
+        case "ORIGIN":
+            let filterDrivers;
+            if (action.payload === "all") return {...state,drivers:state.allDrivers}
+            if (action.payload === "DB") {
+                filterDrivers = state.allDrivers.filter(driver => {return driver.createdInDb === true})
+            }
+            if (action.payload === "API") {
+                filterDrivers = state.allDrivers.filter(driver => {return !driver.hasOwnProperty("createdInDb")})
+            }
+            return {...state,drivers:filterDrivers}
 
         case "ERROR":
             errors.errors = state.payload;

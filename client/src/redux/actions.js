@@ -31,4 +31,10 @@ export const setPage = (page) => {
         type: "SETPAGE",
         payload: page
     }
-}
+};
+export const filterDriversByOrigin = (origin) => {
+    return {
+        type: "ORIGIN",
+        payload: origin
+    }
+};

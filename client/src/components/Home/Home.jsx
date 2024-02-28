@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Cards from '../Cards/Cards';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterDriversByTeam, orderDrivers, setAllDrivers, setPage } from '../../redux/actions.js';
+import { filterDriversByTeam, orderDrivers, setAllDrivers, setPage, filterDriversByOrigin } from '../../redux/actions.js';
 import "./Home.css";
 
 export default function Home() {
@@ -25,9 +25,15 @@ export default function Home() {
       dispatch(setPage(1));
     };
 
+    const handleOrigin = event => {
+      dispatch(filterDriversByOrigin(event.target.value));
+      dispatch(setPage(1));
+    };
+
     const handlePage = event => {
       dispatch(setPage(event.target.value));
     };
+
 
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(drivers.length / driversPerPage); i++) {
@@ -58,9 +64,9 @@ export default function Home() {
       }, []);
       
     return (
-        <div className='home'>
+        <div className='home' id='home'>
             <select name="filter" onChange={handleFilter}>
-              <option value="All">All</option>
+              <option value="All">Todas las escuderias</option>
               <option value="McLaren">McLaren</option>
               <option value="Mercedes">Mercedes</option>
               <option value="Prost">Prost</option>
@@ -85,6 +91,11 @@ export default function Home() {
               <option value="Spyker">Spyker</option>
               <option value="Porsche">Porsche</option>
               <option value="Force India">Force India</option>
+            </select>
+            <select name="createdInDb" onChange={handleOrigin}>
+              <option value="all">Todos</option>
+              <option value="DB">Base de Datos</option>
+              <option value="API">API</option>
             </select>
             <select name="order" onChange={handleOrder}>
               <option value="aNombre">Ascendente alfabetico</option>
