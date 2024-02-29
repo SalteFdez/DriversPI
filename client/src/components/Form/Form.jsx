@@ -45,8 +45,10 @@ export default function Form() {
 
             if (response.status === 200) {
                 console.log("Se ha subido tu driver a la base de datos.")
+                alert("Se ha subido tu driver a la base de datos.")
             } else {
                 console.log("Algo ha salido mal.")
+                alert("Algo ha salido mal.")
             }
 
         } catch (error) {
