@@ -1,0 +1,40 @@
+.paginado-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.paginado {
+    list-style: none;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.number {
+    display: inline-block;
+}
+
+.number button {
+    background-color: red;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 8px 12px;
+    cursor: pointer;
+    width: 40px;
+    box-sizing: border-box;
+}
+
+.number button:hover {
+    background-color: rgb(19, 20, 29);
+    border-color: white;
+}
+
+.number.active button {
+    background-color: rgb(19, 20, 29);
+    border-color: white;
+    font-weight: bold;
+}

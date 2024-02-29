@@ -1,19 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cards from '../Cards/Cards';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterDriversByTeam, orderDrivers, setAllDrivers, setPage, filterDriversByOrigin } from '../../redux/actions.js';
+import Paginado from '../Paginado/Paginado.jsx';
 import "./Home.css";
+import { Link } from 'react-router-dom';
 
 export default function Home() {
     const dispatch = useDispatch();
     const drivers = useSelector((state) => state.drivers);
-    const currentPage = useSelector((state) => state.currentPage);
-    const driversPerPage = useSelector((state) => state.driversPerPage);
 
+    const [ currentPage, setCurrentPage ] = useState(1);
+    const [ driversPerPage, setDriversPerPage ] = useState(9);
     const indexOfLastDriver = currentPage * driversPerPage;
     const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
     const currentDrivers = drivers.slice(indexOfFirstDriver, indexOfLastDriver);
+
+    const paginado = (pageNumber) => {
+      setCurrentPage(pageNumber)
+    }
     
     const handleFilter = event => {
       dispatch(filterDriversByTeam(event.target.value));
@@ -30,16 +36,6 @@ export default function Home() {
       dispatch(setPage(1));
     };
 
-    const handlePage = event => {
-      dispatch(setPage(event.target.value));
-    };
-
-
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(drivers.length / driversPerPage); i++) {
-        pageNumbers.push(i);
-    }
-
     useEffect(() => {
       const fetchDrivers = async () => {
         try {
@@ -49,8 +45,6 @@ export default function Home() {
               'Cache-Control': 'no-cache',
             },
           });
-
-          //const responseAPI = await axios.get('http://localhost:5000/drivers');
 
           dispatch(setAllDrivers(responseDB.data));
 
@@ -103,12 +97,13 @@ export default function Home() {
               <option value="dNacimiento">Edad ascendente</option>
               <option value="aNacimiento">Edad descendente</option>
             </select>
+            <Paginado
+              driversPerPage = { driversPerPage }
+              drivers = { drivers.length }
+              paginado = { paginado }
+            />
             <Cards drivers={currentDrivers}/>
-            <select name="page" onChange={handlePage}>
-              {pageNumbers.map((num, index) => (
-                <option key={index} value={num}>{num}</option>
-              ))}
-            </select>
+            
         </div>
     );
 }
