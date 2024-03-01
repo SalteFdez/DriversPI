@@ -32,7 +32,7 @@ export default function About() {
             </p>
             <p>Saludos, Agustin Perez.</p>
 
-            <img src={"/my_photo.png"} alt="Mi Foto" className="profile-photo" />
+            <img src={"/my_photo.jpg"} alt="Mi Foto" className="profile-photo" />
         </div>
     );
 }
