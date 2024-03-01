@@ -7,13 +7,15 @@ export default function Card(props) {
         ? "/logo_default.png"
         : props.image
 
-    return (
-        <div className="card-container">
-            <Link to={`/detail/${props.id}`}>
-                <h2>{props.name}</h2>
-            </Link>
-            <h4>Escuderías: {props.teams}</h4>
-            <img src={imageUrl} alt={props.id}/>
-        </div>
-    );
+    
+        return (
+            <div className="card-container">
+                <Link to={`/detail/${props.id}`}>
+                    <h2>{props.name}</h2>
+                </Link>
+                <h4>Escuderías: {props.teams}</h4>
+                <img src={imageUrl} alt={props.id}/>
+            </div>
+        );
+    
 }

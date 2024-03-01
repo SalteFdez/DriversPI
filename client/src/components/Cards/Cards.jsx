@@ -24,13 +24,13 @@ export default function Cards({ drivers }) {
       else {
         driver.id = uuidToNumber(driver.id);
         driver.id = driver.id % 1000 + 600;
-        console.log(driver)
+        const teams = driver.Teams.map(valor => valor.name.toString()).join(", ");
         return (
           <Card
             key={driver.id}
             id={driver.id}
             name={driver.name}
-            teams={driver.teams}
+            teams={teams}
             image={driver.image}
           />
         );

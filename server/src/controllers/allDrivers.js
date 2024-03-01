@@ -17,7 +17,7 @@ const allDrivers = async (req, res) => {
         });
 
         const drivers = [...response.data, ...driversFromDB]
-        console.log(drivers)
+        
         console.log(driversFromDB)
 
         return res.status(200).json(drivers);

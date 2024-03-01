@@ -52,30 +52,48 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case "FILTERBYTEAM":
-            if (action.payload === "All") return {
-                ...state,
-                drivers: state.allDrivers
+            if (action.payload === "All") {
+                return {
+                    ...state,
+                    drivers: state.allDrivers
+                };
             }
-
-            const teamFilter = state.drivers.filter((driver) => {
-                const teamsArray = (driver.teams && driver.teams.split(',')) || [];
-                return teamsArray.some((team) => team.trim() === action.payload);
-            })
-
+        
+            const teamFilter = state.allDrivers.filter((driver) => {
+                if (driver.teams) {
+                    const teamsArray = (driver.teams && driver.teams.split(',')) || [];
+                    return teamsArray.some((team) => team.trim() === action.payload);
+                } else if (driver.Teams) {
+                    return driver.Teams.some((team) => team.name.toLowerCase() === action.payload.toLowerCase());
+                }
+                return false; 
+            });
+        
             return {
                 ...state,
                 drivers: teamFilter
-            }
+            };
+            
 
         case "ORDER":
             const orderCopy = [...state.drivers];
             
             orderCopy.sort((a, b) => {
-                const nameA = (a.name && a.name.forename) || "";
-                const nameB = (b.name && b.name.forename) || "";
-            
-                const dobA = a.dob || "";
-                const dobB = b.dob || "";
+                if (typeof a.name === "object") {
+                    var nameA = (a.name && a.name.forename) || "";
+                } else {
+                    var nameA = (a.name)
+                }  
+                if (typeof b.name === "object") {
+                    var nameB = (b.name && b.name.forename) || "";
+                } else {
+                    var nameB = (b.name)
+                }
+                
+                const dobA = a.dob || a.bornDate || "";
+                const dobB = b.dob || b.bornDate || "";
+                
+                
             
                 if (action.payload === "aNombre") return nameA.localeCompare(nameB);
                 if (action.payload === "dNombre") return nameB.localeCompare(nameA);

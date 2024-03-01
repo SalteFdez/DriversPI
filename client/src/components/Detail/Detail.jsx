@@ -29,6 +29,8 @@ export default function Detail({ drivers }) {
             </div>
         )
     } else {
+        const teams = driver[0].Teams.map(team => team.name.toString()).join(", ");
+        
         return (
             <div className='details-container'>
                 <div className='details'>
@@ -37,7 +39,7 @@ export default function Detail({ drivers }) {
                     <h4>Nacionalidad: {driver[0].nationality}</h4>
                     <h4>Descripcion: {driver[0].description}</h4>
                     <h4>Fecha de Nacimiento: {driver[0].bornDate}</h4>
-                    <h4>Escuderias: {driver[0].teams}</h4>
+                    <h4>Escuderias: {teams}</h4>
                 </div>
     
                 <div className="photo-container">
