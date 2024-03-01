@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const getDriverById = async (req, res) => {
     try {
-        const id = req.params.idDriver; // cambiar
+        const id = req.params.idDriver;
         const drivers = [];
         const APIDriverResponse = await axios.get(`http://localhost:5000/drivers/${id}`);
         const APIDriver = APIDriverResponse.data;

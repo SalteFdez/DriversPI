@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize');
 
 const getDriverByName = async (req, res) => {
     try {
-        const name = req.query.name; //Cambiar
+        const name = req.query.name;
         
         const response = await axios.get(`http://localhost:5000/drivers?name.forename=${name}`);
         const apiDrivers = response.data;
@@ -12,7 +12,7 @@ const getDriverByName = async (req, res) => {
         const dbDrivers = await Driver.findAll({
             where: {
                 name: {
-                  [Sequelize.Op.iLike]: `%${name}%`, // Consulta case-sensitive
+                  [Sequelize.Op.iLike]: `%${name}%`,
                 },
             },
             limit: 15,
